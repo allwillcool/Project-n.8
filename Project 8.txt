@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <windows.h> 
 
-// Recursive function to calculate factorial
+// Функція для обчислення факторіалу
+
 int factorial(int n) {
     if (n <= 1)
         return 1;
@@ -9,10 +11,10 @@ int factorial(int n) {
         return n * factorial(n - 1);
 }
 
-// Recursive function to calculate the count of anagrams
+// Функція для обчислення кількості анаграм
+
 int countAnagrams(char word[], int freq[], int wordLength) {
     if (wordLength <= 1) {
-        // If word length <= 1, return 1
         return 1;
     }
 
@@ -28,23 +30,26 @@ int countAnagrams(char word[], int freq[], int wordLength) {
 }
 
 int main() {
+  SetConsoleCP(1251);
+  SetConsoleOutputCP(1251);
     char word[15];
     int freq[26] = {0};
     int wordLength;
 
-    printf("Enter a word: ");
+    printf("Введіть слово, кількість анаграм якого ви шукаєте: ");
     scanf("%s", word);
 
     wordLength = strlen(word);
 
-    // Calculate the frequency of each letter in the word
+// Обчислення частоти кожної літери в слові
+
     for (int i = 0; i < wordLength; i++) {
         freq[word[i] - 'A']++;
     }
 
-    int anagramCount = countAnagrams(word, freq, wordLength) / 2; // Divide by 2 as 'S' and 's' are considered as one letter
+    int anagramCount = countAnagrams(word, freq, wordLength) / 2; // Видаляємо дублювання літер 
 
-    printf("Number of anagrams: %d\n", anagramCount);
+    printf("Кількість анаграм заданого слова: %d\n", anagramCount);
 
     return 0;
 }
